@@ -331,6 +331,28 @@ fpos %>% filter(age<20, potential>72) %>%
 
 ```
 ![img19](Pic/WonderKid.png)
+### Overall and Wage Connection
+```
+ggplot(df,aes(overall,wage_eur))+
+  geom_hex(bins=60)+
+  facet_wrap(league_name~.,scales = "free")+
+  scale_fill_viridis_c()+
+  geom_smooth(method = "loess")+
+  theme_minimal()
+```
+![ovr_wage](https://user-images.githubusercontent.com/70366198/129561203-e2d5e70e-8b28-4ae3-a74e-036651e6c82e.png)
+
+### Age and Wage Connection
+```
+ggplot(df,aes(age,wage_eur))+
+  geom_hex(bins=60)+
+  facet_wrap(league_name~.,scales = "free")+
+  scale_fill_viridis_c()+
+  geom_smooth(method = "loess")+
+  theme_minimal()
+```
+![age_wage](https://user-images.githubusercontent.com/70366198/129561612-2b3079d8-da3c-4ac5-a227-990ca6764e51.png)
+
 
 ### Most Expensive team possible(Using the given Data)
 ```
