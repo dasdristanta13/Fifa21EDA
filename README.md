@@ -329,3 +329,31 @@ fpos %>% filter(age<20, potential>72) %>%
 ```
 ![img19](Pic/WonderKid.png)
 
+### Most Expensive team possible(Using the given Data)
+```
+d2 <- data.frame(   x=c(0, 0, 16.5, 100, 100,83.5), 
+                    xend=c(16.5,16.5, 16.5, 83.5,83.5,83.5),
+                    y=rep(c(13.68, 61.32, 13.68),2), 
+                    yend=rep(c(13.68,61.32,61.32),2))
+
+pp <- data.frame(   x=c(0,16.5,16.5,25,25,50,50,75,75,87.5),
+                    y=c(37.5,13.68,61.32,0,75,18.75,56.25,0,75,37.5),
+                    name=c("J. Oblak"," V. van Dijk","A. Laporte",
+                           "T. Alexander-Arnold","A. Robertson",
+                           "T. Kroos","F. de Jong",
+                           "M. Salah","Neymar Jr",
+                           "K. Mbapp?"))
+p<- ggplot(dfpos)+
+  xlim(0,100)+ylim(0,75)+
+  geom_vline(xintercept = c(0,50,100), color="white") + 
+  geom_segment(data = d2,aes(x=x, xend=xend, y=y,yend=yend), color="white") +
+  geom_point(aes(x=50,y=75/2), size=2, color="white") +
+  geom_point(data=pp,aes(x=x,y=y), size=7, color="orange")+
+  geom_text(data=pp,aes(x=x,y=y,label = name),size=5)+
+  theme(panel.background = element_rect(fill = "darkgreen"),
+        panel.grid = element_line(colour = "darkgreen"))+
+  labs(title = "Most Expensive team possible in Fifa 21",subtitle = "With most recent player valuation")+
+  xlab("")+ylab("")
+p
+```
+![img20](Pic/Team.png)
