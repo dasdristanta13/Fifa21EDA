@@ -83,7 +83,7 @@ Germany <- subset(f21,f21$nationality=="Germany")
 #club wise some selection
 
 Barcelona <- subset(f21,f21$club_name=="FC Barcelona")
-BMunich <- subset(f21,f21$club_name=="FC Bayern München")
+BMunich <- subset(f21,f21$club_name=="FC Bayern MÃ¼nchen")
 Juventus <- subset(f21,f21$club_name=="Juventus")
 
 
@@ -452,7 +452,7 @@ pp <- data.frame(   x=c(0,16.5,16.5,25,25,50,50,75,75,87.5),
                            "T. Alexander-Arnold","A. Robertson",
                            "T. Kroos","F. de Jong",
                            "M. Salah","Neymar Jr",
-                           "K. Mbappé"))
+                           "K. MbappÃ©"))
 
 
 pp
@@ -471,80 +471,3 @@ p<- ggplot(dfpos)+
   xlab("")+ylab("")
 
 
-
-
-
-
-
-ggplotly(p)
-
-####
-
-
-doababsb
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#Pratik Karmakar8:44 PM
-#library(plotrix)
-#TotalSui<-as.data.frame(tapply(SD_Continent$total_sui,SD_Continent$continent_fac, sum))
-#View(TotalSui)
-#TotalSui$continent<-rownames(TotalSui)
-#TotalSui<-TotalSui[,c(2,1)]
-#colnames(TotalSui)[2]<-"Suicides"
-#picol<-c("coral","cornflowerblue","chartreuse","brown1","darkolivegreen1")
-#pie3D(TotalSui$Suicides,labels = TotalSui$continent,explode = 0.2, main = "Pie chart of Suicide numbers
-#of different Continents",shade = 0.6,border = "NA",col=picol)
