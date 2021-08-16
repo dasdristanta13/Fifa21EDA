@@ -6,24 +6,9 @@ Data has been scraped from the publicly available [website](https://sofifa.com/)
 
 ## About
 FIFA 21 is an association football simulation video game published by Electronic Arts as part of the FIFA series.[1] It is the 28th installment in the FIFA series, and was released on 9 October 2020 for Microsoft Windows, Nintendo Switch, PlayStation 4 and Xbox One. Enhanced versions for the PlayStation 5 and Xbox Series X and Series S were released on 3 December 2020, in addition to a version for Stadia in March 2021.
-## Explaination
 
-Let us have a look what sort of questions we can answer from the data.
-
-```
-Q1. Distribution of Player age in Each League.[How to show mean in the graph]
-Q2. How rich a league is(Graph of that)
-Q3. Country based no of players.
-Q4. Player Specific Statistics Comparison
-Q5. Selecting a player and position-wise his stat[Using faceting but how can I achieve different colours and give particular position a particular place in graph]
-Q6. How fit a player is[Relative to Body Mass Index]
-Q7. Divide Data-set into player types(like, Goalkeeper, Midfielder, Forward , Winger)
-Q8. Select a club and Ovr vs Potential comparison of all players
-Q9. Best players in each position(without repetition) and their top 6 best stats
-Q10. Age vs wage [League wise]
-Q11. Top Young sensations
-Q12. Position vs Strong Foot
-```
+## About the data
+Data includes lastest edition FIFA 2021 players attributes like Age, Nationality, Overall, Potential, Club, Value, Wage, Preferred Foot, International Reputation, Weak Foot, Skill Moves, Work Rate, Position, Jersey Number, Joined, Loaned From, Contract Valid Until, Height, Weight, LS, ST, RS, LW, LF, CF, RF, RW, LAM, CAM, RAM, LM, LCM, CM, RCM, RM, LWB, LDM, CDM, RDM, RWB, LB, LCB, CB, RCB, RB, Crossing, Finishing, Heading, Accuracy, ShortPassing, Volleys, Dribbling, Curve, FKAccuracy, LongPassing, BallControl, Acceleration, SprintSpeed, Agility, Reactions, Balance, ShotPower, Jumping, Stamina, Strength, LongShots, Aggression, Interceptions, Positioning, Vision, Penalties, Composure, Marking, StandingTackle, SlidingTackle, GKDiving, GKHandling, GKKicking, GKPositioning, GKReflexes, and Release Clause.
 
 
 ## Code And Workings
