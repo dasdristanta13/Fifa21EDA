@@ -258,39 +258,39 @@ subset(fpos,Pos=="Forward") %>% arrange(desc(overall))%>%head(20)%>%
   ggplot(aes(x=overall,y=reorder(short_name,overall)))+geom_col(aes(fill=short_name),show.legend = F)+
   labs(x="Overall",y="Name",title = "Top 20 Forwards in the World")
 ```
-
+![img12](Pic/Top20Forwards.png)
 #### Wingers
 ```
 subset(fpos,Pos=="Winger") %>% arrange(desc(overall))%>%head(20)%>%
   ggplot(aes(x=overall,y=reorder(short_name,overall)))+geom_col(aes(fill=short_name),show.legend = F)+
   labs(x="Overall",y="Name",title = "Top 20 Wingers in the World")
 ```
-
+![img13](Pic/Top20Wingers.png)
 #### Midfielders
 ```
 subset(fpos,Pos=="Midfielder") %>% arrange(desc(overall))%>%head(20)%>%
   ggplot(aes(x=overall,y=reorder(short_name,overall)))+geom_col(aes(fill=short_name),show.legend = F)+
   labs(x="Overall",y="Name",title = "Top 20 Midfielders in the World")
 ```
-
+![img14](Pic/Top20Midfielders.png)
 #### Defenders
 ```
 subset(fpos,Pos=="Defender") %>% arrange(desc(overall))%>%head(20)%>%
   ggplot(aes(x=overall,y=reorder(short_name,overall)))+geom_col(aes(fill=short_name),show.legend = F)+
   labs(x="Overall",y="Name",title = "Top 20 Defenders in the World")
 ```
-
+![img15](Pic/Top20Def.png)
 #### Full-Backs
 ```
 subset(fpos,Pos=="Full Back") %>% arrange(desc(overall))%>%head(20)%>%
   ggplot(aes(x=overall,y=reorder(short_name,overall)))+geom_col(aes(fill=short_name),show.legend = F)+
   labs(x="Overall",y="Name",title = "Top 20 Full Backs in the World")
 ```
-
+![img16](Pic/Top20FullBack.png)
 #### Goal Keepers
 ```
 subset(fpos,Pos=="Goal Keeper") %>% arrange(desc(overall))%>%head(20)%>%
   ggplot(aes(x=overall,y=reorder(short_name,overall)))+geom_col(aes(fill=short_name),show.legend = F)+
   labs(x="Overall",y="Name",title = "Top 20 Goal Keepers in the World")
 ```
-
+![img17](Pic/Top20GK.png)
