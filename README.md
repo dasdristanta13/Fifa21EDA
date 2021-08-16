@@ -5,30 +5,20 @@
 
 Let us have a look what sort of questions we can answer from the data.
 
-```Q1. Distribution of Player age in Each League.[How to show mean in the graph]```
-
-```Q2. How rich a league is(Graph of that)```
-
-```Q3. Country based no of players.```
-
-```Q4. Player Specific Statistics Comparison```
-
-```Q5. Selecting a player and position-wise his stat[Using faceting but how can I achieve different colours and give particular position a particular place in graph]```
-
-```Q6. How fit a player is[Relative to Body Mass Index]```
-
-```Q7. Divide Data-set into player types(like, Goalkeeper, Midfielder, Forward , Winger)```
-
-```Q8. Select a club and Ovr vs Potential comparison of all players```
-
-```Q9. Best players in each position(without repetition) and their top 6 best stats```
-
-```Q10. Age vs wage [League wise]```
-
-```Q11. Top Young sensations```
-
-```Q12. Position vs Strong Foot```
-
+```
+Q1. Distribution of Player age in Each League.[How to show mean in the graph]
+Q2. How rich a league is(Graph of that)
+Q3. Country based no of players.
+Q4. Player Specific Statistics Comparison
+Q5. Selecting a player and position-wise his stat[Using faceting but how can I achieve different colours and give particular position a particular place in graph]
+Q6. How fit a player is[Relative to Body Mass Index]
+Q7. Divide Data-set into player types(like, Goalkeeper, Midfielder, Forward , Winger)
+Q8. Select a club and Ovr vs Potential comparison of all players
+Q9. Best players in each position(without repetition) and their top 6 best stats
+Q10. Age vs wage [League wise]
+Q11. Top Young sensations
+Q12. Position vs Strong Foot
+```
 
 
 ## Code And Workings
@@ -56,24 +46,6 @@ f21 <- f21[,c(-22,-23)]
 f21 <- f21[,-23]
 f21 <- f21[,-25]
 f21 <- f21[,-41]
-levels(factor(f21$club_name))
-length(factor(f21$club_name))
-f21 %>% group_by(club_name== "Barcelona")  
-levels(factor(f21$overall))
-levels(factor(f21$potential))
-
-head(strsplit(f21$player_positions, split = ","))
-levels(factor(strsplit(f21$player_positions, split = ",")))
-head(f21[,c(41:45)])
-f21[,c(41:45)] %>% colnames() %>% strsplit(.,split = "_")
-
-
-
-
-
-
-
-
 f21 <- f21 %>% select(-gk_diving,-gk_handling,-gk_kicking,-gk_reflexes,-gk_speed,-gk_positioning)
 f21 <- f21 %>% select(-defending_marking)
 f21 <- f21 %>% select(-sofifa_id)
@@ -208,3 +180,117 @@ Brazil %>%
 
 ```
 ![img5](Pic/Brazil.png)
+
+### Messi Vs Ronaldo (Before the transfer of Messi)
+```
+options(repr.plot.width = 15,repr.plot.height = 8)
+
+
+ggplot(player,aes(Skill,Exp,fill=Name))+ geom_col(position = "fill")+
+  coord_flip()+ scale_fill_manual(limits=c("L. Messi,FC Barcelona","Cristiano Ronaldo,Juventus"),values = c("#ff0000","#75AADB"))+theme_minimal()+
+  geom_hline(yintercept = 0.5,color="yellow",size=0.5,linetype=2)+
+  theme(legend.position = "top",axis.text.y = element_text(face = "bold"),axis.text.x = element_blank())+
+  labs(title = "Ronaldo vs Messi")
+ 
+```
+![img6](Pic/RonaldoVSMessi.png)
+
+### La liga Native and foreign player 
+```
+L_NAT <- La_Liga %>% mutate(Nationality=as.character(nationality),
+                   Nationality = if_else(nationality %in% "Spain","Native","Foreigner"))
+                   
+ggplot(L_NAT)+geom_bar(aes(x=Nationality,fill= Nationality),show.legend = F)+
+  facet_wrap(club_name~.)+labs(title = "La Liga Native and Foreigner player")
+```
+![img7](Pic/LaLigaNatvsForeign.png)
+
+### EPL Native and foreign player
+```
+EPL_NAT <- EPL %>% mutate(Nationality=as.character(nationality),
+                            Nationality = if_else(nationality %in% "England","Native","Foreigner"))
+
+ggplot(EPL_NAT)+geom_bar(aes(x=Nationality,fill= Nationality),show.legend = F)+
+  facet_wrap(club_name~.)+labs(title = "EPL Native and Foreigner player")
+```
+
+![img8](Pic/EPLNatvsForeign.png)
+
+### Bundesliga Native and foreign player
+```
+Bund_NAT <- Bundesliga %>% mutate(Nationality=as.character(nationality),
+                            Nationality = if_else(nationality %in% "Germany","Native","Foreigner"))
+
+ggplot(Bund_NAT)+geom_bar(aes(x=Nationality,fill= Nationality),show.legend = F)+
+  facet_wrap(club_name~.,nrow = 3)+labs(title = "Bundesliga Native and Foreigner player")
+
+```
+![img9](Pic/BundesLigaNatvsForeign.png)
+
+### Distribution of players in the whole Fifa data
+```
+options(repr.plot.width = 15,repr.plot.height = 8)
+
+
+f21 %>% drop_na(player_positionsb)%>%
+  ggplot()+geom_bar(aes(x=player_positionsb,fill=player_positionsb),show.legend = F)+
+  labs(title = "Player position distribution in the World")
+```
+![img10](Pic/PosDistWorld.png)
+
+### Distribution in some top leagues
+```
+options(repr.plot.width = 15,repr.plot.height = 8)
+
+
+df %>% drop_na(player_positionsb)%>%
+  ggplot()+geom_bar(aes(y=reorder(player_positionsb,player_positionsb, function(x) tapply(x,x,length)),fill=player_positionsb),show.legend = F)+
+  facet_wrap(league_name~.,strip.position = "top")+
+  labs(title="League wise Player position distribution")+xlab("Count")+ylab("Positions")
+
+```
+![img11](Pic/PosDistClub.png)
+
+### Top 20
+#### Forwards
+```
+subset(fpos,Pos=="Forward") %>% arrange(desc(overall))%>%head(20)%>%
+  ggplot(aes(x=overall,y=reorder(short_name,overall)))+geom_col(aes(fill=short_name),show.legend = F)+
+  labs(x="Overall",y="Name",title = "Top 20 Forwards in the World")
+```
+
+#### Wingers
+```
+subset(fpos,Pos=="Winger") %>% arrange(desc(overall))%>%head(20)%>%
+  ggplot(aes(x=overall,y=reorder(short_name,overall)))+geom_col(aes(fill=short_name),show.legend = F)+
+  labs(x="Overall",y="Name",title = "Top 20 Wingers in the World")
+```
+
+#### Midfielders
+```
+subset(fpos,Pos=="Midfielder") %>% arrange(desc(overall))%>%head(20)%>%
+  ggplot(aes(x=overall,y=reorder(short_name,overall)))+geom_col(aes(fill=short_name),show.legend = F)+
+  labs(x="Overall",y="Name",title = "Top 20 Midfielders in the World")
+```
+
+#### Defenders
+```
+subset(fpos,Pos=="Defender") %>% arrange(desc(overall))%>%head(20)%>%
+  ggplot(aes(x=overall,y=reorder(short_name,overall)))+geom_col(aes(fill=short_name),show.legend = F)+
+  labs(x="Overall",y="Name",title = "Top 20 Defenders in the World")
+```
+
+#### Full-Backs
+```
+subset(fpos,Pos=="Full Back") %>% arrange(desc(overall))%>%head(20)%>%
+  ggplot(aes(x=overall,y=reorder(short_name,overall)))+geom_col(aes(fill=short_name),show.legend = F)+
+  labs(x="Overall",y="Name",title = "Top 20 Full Backs in the World")
+```
+
+#### Goal Keepers
+```
+subset(fpos,Pos=="Goal Keeper") %>% arrange(desc(overall))%>%head(20)%>%
+  ggplot(aes(x=overall,y=reorder(short_name,overall)))+geom_col(aes(fill=short_name),show.legend = F)+
+  labs(x="Overall",y="Name",title = "Top 20 Goal Keepers in the World")
+```
+
