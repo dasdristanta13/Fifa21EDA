@@ -1,6 +1,9 @@
 # Fifa 21 (Game) Data @EaSports
 ![Img](Pic/fifa-21.jpg)
 
+## Acknowledgement
+Data has been scraped from the publicly available [website](https://sofifa.com/)
+
 ## Explaination
 
 Let us have a look what sort of questions we can answer from the data.
