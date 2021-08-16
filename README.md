@@ -265,7 +265,7 @@ subset(fpos,Pos=="Winger") %>% arrange(desc(overall))%>%head(20)%>%
   ggplot(aes(x=overall,y=reorder(short_name,overall)))+geom_col(aes(fill=short_name),show.legend = F)+
   labs(x="Overall",y="Name",title = "Top 20 Wingers in the World")
 ```
-![img13](Pic/Top20Wingers.png)
+![img13](Pic/Top20Winger.png)
 #### Midfielders
 ```
 subset(fpos,Pos=="Midfielder") %>% arrange(desc(overall))%>%head(20)%>%
@@ -294,3 +294,38 @@ subset(fpos,Pos=="Goal Keeper") %>% arrange(desc(overall))%>%head(20)%>%
   labs(x="Overall",y="Name",title = "Top 20 Goal Keepers in the World")
 ```
 ![img17](Pic/Top20GK.png)
+
+
+### Most Powerful Clubs
+```
+fpos %>%
+  group_by(club_name,Pos) %>%
+  summarise(mean=mean(overall)) %>%
+  ungroup() %>% 
+  filter(club_name %in% powerful$club_name) %>%
+  ggplot(aes(reorder(club_name,mean),mean,fill= Pos))+
+  geom_col(position = "fill")+
+  geom_text(aes(label = round(mean,digits = 2)),position = position_fill(0.5),size=3.5)+
+  coord_flip()+
+  theme_minimal()+
+  theme(legend.position = "top",axis.text.y = element_text(face = "bold"),axis.text.x = element_blank())+
+  labs(x="",y="",title = "Top 20 powerful clubs with their position class")
+```
+![img18](Pic/TopPowerClubs.png)
+
+### Wonder Kids
+```
+fpos %>% filter(age<20, potential>72) %>%
+  arrange(-potential) %>%
+  group_by(age)%>%
+  do(head(.,10)) %>%
+  ggplot(aes(reorder(paste0(paste(short_name,player_positionsb, sep = ", "),"(",club_name,
+                            ")"),potential),potential,fill=as.factor(age)))+
+  geom_col(show.legend = F)+
+  coord_flip()+
+  facet_wrap(age~.,scales = "free")+
+  labs(x="",y="Potential",title = "Age-wise Wonder-Kids",subtitle = "Amongst them some might become star")
+
+```
+![img19](Pic/WonderKid.png)
+
