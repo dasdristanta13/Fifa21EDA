@@ -72,16 +72,23 @@ library("infer")
   Spain <- subset(f21,f21$nationality=="Spain")
   Germany <- subset(f21,f21$nationality=="Germany")
   ```
-    </details>
+</details>
   
-  #### Club wise some selection
+#### Club wise some selection
+<details>
+  <summary>Click to expand!</summary>
   
   ```r
   Barcelona <- subset(f21,f21$club_name=="FC Barcelona")
   BMunich <- subset(f21,f21$club_name=="FC Bayern M?nchen")
   Juventus <- subset(f21,f21$club_name=="Juventus")
   ```
-  #### League wise some selection
+</details>
+
+#### League wise some selection
+<details>
+  <summary>Click to expand!</summary>
+ 
   ```r
   La_Liga <- subset(f21,f21$league_name=="Spain Primera Division")
   Serie_A <- subset(f21,f21$league_name=="Italian Serie A")
@@ -89,33 +96,39 @@ library("infer")
   Ligue_1 <- subset(f21,f21$league_name=="French Ligue 1")
   EPL <- subset(f21,f21$league_name=="English Premier League")
   ```
-  </details>
+</details>
   
 ### Distribution and the Average Age of The Players in each League
+<details>
+  <summary>Click to expand!</summary>
+ 
+  ```r
+  summ <- df %>% 
+    group_by(league_name) %>% 
+    summarise(Age = mean(age))
 
-```r
-summ <- df %>% 
-  group_by(league_name) %>% 
-  summarise(Age = mean(age))
 
 
+  options(repr.plot.width = 12, repr.plot.height = 8)
 
-options(repr.plot.width = 12, repr.plot.height = 8)
-
-ggplot()+
-  geom_histogram(df, mapping = aes(age, fill = league_name))+
-  geom_vline(summ, mapping = aes(xintercept = Age), color = "red", size = 1.5)+
-  geom_text(summ, mapping = aes(x = Age+3, y = 65, label = round(Age,digits = 2)))+
-  facet_wrap(league_name~.)+
-  theme_minimal()+
-  theme(legend.position = "bottom")+
-  labs(y = "Frequency", title = "Distribution & The Average Age of The Players in each League", 
-       caption = "@EA Sports - FIFA 21")
-```
+  ggplot()+
+    geom_histogram(df, mapping = aes(age, fill = league_name))+
+    geom_vline(summ, mapping = aes(xintercept = Age), color = "red", size = 1.5)+
+    geom_text(summ, mapping = aes(x = Age+3, y = 65, label = round(Age,digits = 2)))+
+    facet_wrap(league_name~.)+
+    theme_minimal()+
+    theme(legend.position = "bottom")+
+    labs(y = "Frequency", title = "Distribution & The Average Age of The Players in each League", 
+         caption = "@EA Sports - FIFA 21")
+  ```
+</details>
 
 ![Img2](Pic/Plot1.png)
 
 ### World map and Players available in Fifa 21 Game
+<details>
+  <summary>Click to expand!</summary>
+ 
 ```r
 options(repr.plot.width = 12, repr.plot.height = 8)
 
@@ -138,27 +151,34 @@ ggplot(numofplayers, aes(long, lat, group = group))+
   labs(fill = "Number of Player",
        title = "Players enlisted from countries")
 ```
+</details>
+  
 ![Img3](Pic/Plot2.png)
 
 ### Players from Barcelona(As Was in Fifa21)
-```r
-options(repr.plot.width = 12, repr.plot.height = 8)
+<details>
+  <summary>Click to expand!</summary>
+ 
+  ```r
+  options(repr.plot.width = 12, repr.plot.height = 8)
 
-Barcelona %>% 
-  select(short_name, overall, potential) %>% 
-  arrange(-overall) %>% 
-  head(15) %>% 
-  gather(variable, Exp, -short_name) %>% 
-  ggplot(aes(short_name, Exp, fill = variable))+
-  geom_col(position = "dodge")+
-  geom_text(aes(label = Exp),position = position_dodge(width = 0.9), vjust = -0.5)+
-  scale_fill_manual(values = c("#004D98", "#A50044"))+
-  theme_minimal()+
-  theme(legend.position = "bottom")+
-  labs(fill = NULL, x = NULL, title = "Barcelona")+
-  theme(axis.text.x = element_text(face="bold",angle = 90, vjust = 0.5, hjust=1))
+  Barcelona %>% 
+    select(short_name, overall, potential) %>% 
+    arrange(-overall) %>% 
+    head(15) %>% 
+    gather(variable, Exp, -short_name) %>% 
+    ggplot(aes(short_name, Exp, fill = variable))+
+    geom_col(position = "dodge")+
+    geom_text(aes(label = Exp),position = position_dodge(width = 0.9), vjust = -0.5)+
+    scale_fill_manual(values = c("#004D98", "#A50044"))+
+    theme_minimal()+
+    theme(legend.position = "bottom")+
+    labs(fill = NULL, x = NULL, title = "Barcelona")+
+    theme(axis.text.x = element_text(face="bold",angle = 90, vjust = 0.5, hjust=1))
 
-```
+  ```
+  </details>
+  
 ![img4](Pic/Barcelona.png)
 
 ### Players from Brazil
