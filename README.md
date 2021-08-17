@@ -26,61 +26,71 @@ library("infer")
 ```
 
 ### Data Loading, Cleaning and Data Preparation
+<details>
+  <summary>Click to expand!</summary>
+  
+  ```r
+  f21 <- read.csv("players_21.csv")
 
-```r
-f21 <- read.csv("players_21.csv")
+  f21 <- read.csv("players_21.csv", na.strings = c("", "NA"))
+  f21[,2]
+  f21 <- f21[,-2]
+  f21 <- f21[,c(-22,-23)]
+  f21 <- f21[,-23]
+  f21 <- f21[,-25]
+  f21 <- f21[,-41]
+  f21 <- f21 %>% select(-gk_diving,-gk_handling,-gk_kicking,-gk_reflexes,-gk_speed,-gk_positioning)
+  f21 <- f21 %>% select(-defending_marking)
+  f21 <- f21 %>% select(-sofifa_id)
 
-f21 <- read.csv("players_21.csv", na.strings = c("", "NA"))
-f21[,2]
-f21 <- f21[,-2]
-f21 <- f21[,c(-22,-23)]
-f21 <- f21[,-23]
-f21 <- f21[,-25]
-f21 <- f21[,-41]
-f21 <- f21 %>% select(-gk_diving,-gk_handling,-gk_kicking,-gk_reflexes,-gk_speed,-gk_positioning)
-f21 <- f21 %>% select(-defending_marking)
-f21 <- f21 %>% select(-sofifa_id)
+  f21 <- f21 %>% rename(Crossing=attacking_crossing        , Finishing=attacking_finishing ,      
+                  HeadingAccuracy=attacking_heading_accuracy, ShortPassing=attacking_short_passing  ,  Volleys=attacking_volleys  ,       
+                  Dribbling=skill_dribbling         ,   Curve=skill_curve     ,           FkAccuracy=skill_fk_accuracy    ,     
+                  LongPassing=skill_long_passing    ,     Ball_Control=skill_ball_control     ,    Acceleration=movement_acceleration   ,  
+                  SprintSpeed=movement_sprint_speed   ,   Agility=movement_agility    ,       Reactions=movement_reactions    ,    
+                  Balance=movement_balance    ,       ShotPower=power_shot_power    ,       Jumping=power_jumping   ,          
+                  Stamina=power_stamina   ,           Strength=power_strength   ,          LongShot=power_long_shots    ,      
+                  Aggression=mentality_aggression   ,    Interception=mentality_interceptions   , Positioning=mentality_positioning   ,  
+                  Vision=mentality_vision   ,        Penalty=mentality_penalties    ,    Composure=mentality_composure    ,   
+                  StandingTackle=defending_standing_tackle  ,    SlidingTackle=defending_sliding_tackle   ,   GK_Diving=goalkeeping_diving    ,    
+                  GK_Handling=goalkeeping_handling   ,    GK_Kicking=goalkeeping_kicking    ,    GK_Positioning=goalkeeping_positioning   ,
+                  GK_Reflexes=goalkeeping_reflexes)
 
-f21 <- f21 %>% rename(Crossing=attacking_crossing        , Finishing=attacking_finishing ,      
-                HeadingAccuracy=attacking_heading_accuracy, ShortPassing=attacking_short_passing  ,  Volleys=attacking_volleys  ,       
-                Dribbling=skill_dribbling         ,   Curve=skill_curve     ,           FkAccuracy=skill_fk_accuracy    ,     
-                LongPassing=skill_long_passing    ,     Ball_Control=skill_ball_control     ,    Acceleration=movement_acceleration   ,  
-                SprintSpeed=movement_sprint_speed   ,   Agility=movement_agility    ,       Reactions=movement_reactions    ,    
-                Balance=movement_balance    ,       ShotPower=power_shot_power    ,       Jumping=power_jumping   ,          
-                Stamina=power_stamina   ,           Strength=power_strength   ,          LongShot=power_long_shots    ,      
-                Aggression=mentality_aggression   ,    Interception=mentality_interceptions   , Positioning=mentality_positioning   ,  
-                Vision=mentality_vision   ,        Penalty=mentality_penalties    ,    Composure=mentality_composure    ,   
-                StandingTackle=defending_standing_tackle  ,    SlidingTackle=defending_sliding_tackle   ,   GK_Diving=goalkeeping_diving    ,    
-                GK_Handling=goalkeeping_handling   ,    GK_Kicking=goalkeeping_kicking    ,    GK_Positioning=goalkeeping_positioning   ,
-                GK_Reflexes=goalkeeping_reflexes)
-
-```
+  ```
+  </details>
 
 #### Nationality wise some selection
-```r
-France <- subset(f21,f21$nationality=="France")
-India <- subset(f21,f21$nationality=="India")
-Argentina <- subset(f21,f21$nationality=="Argentina")
-Portugal <- subset(f21,f21$nationality=="Portugal")
-Brazil <- subset(f21,f21$nationality=="Brazil")
-Spain <- subset(f21,f21$nationality=="Spain")
-Germany <- subset(f21,f21$nationality=="Germany")
-```
-#### Club wise some selection
-```r
-Barcelona <- subset(f21,f21$club_name=="FC Barcelona")
-BMunich <- subset(f21,f21$club_name=="FC Bayern M?nchen")
-Juventus <- subset(f21,f21$club_name=="Juventus")
-```
-#### League wise some selection
-```r
-La_Liga <- subset(f21,f21$league_name=="Spain Primera Division")
-Serie_A <- subset(f21,f21$league_name=="Italian Serie A")
-Bundesliga <- subset(f21,f21$league_name=="German 1. Bundesliga")
-Ligue_1 <- subset(f21,f21$league_name=="French Ligue 1")
-EPL <- subset(f21,f21$league_name=="English Premier League")
-```
-
+<details>
+  <summary>Click to expand!</summary>
+  
+  ```r
+  France <- subset(f21,f21$nationality=="France")
+  India <- subset(f21,f21$nationality=="India")
+  Argentina <- subset(f21,f21$nationality=="Argentina")
+  Portugal <- subset(f21,f21$nationality=="Portugal")
+  Brazil <- subset(f21,f21$nationality=="Brazil")
+  Spain <- subset(f21,f21$nationality=="Spain")
+  Germany <- subset(f21,f21$nationality=="Germany")
+  ```
+    </details>
+  
+  #### Club wise some selection
+  
+  ```r
+  Barcelona <- subset(f21,f21$club_name=="FC Barcelona")
+  BMunich <- subset(f21,f21$club_name=="FC Bayern M?nchen")
+  Juventus <- subset(f21,f21$club_name=="Juventus")
+  ```
+  #### League wise some selection
+  ```r
+  La_Liga <- subset(f21,f21$league_name=="Spain Primera Division")
+  Serie_A <- subset(f21,f21$league_name=="Italian Serie A")
+  Bundesliga <- subset(f21,f21$league_name=="German 1. Bundesliga")
+  Ligue_1 <- subset(f21,f21$league_name=="French Ligue 1")
+  EPL <- subset(f21,f21$league_name=="English Premier League")
+  ```
+  </details>
+  
 ### Distribution and the Average Age of The Players in each League
 
 ```r
