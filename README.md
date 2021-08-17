@@ -182,6 +182,9 @@ ggplot(numofplayers, aes(long, lat, group = group))+
 ![img4](Pic/Barcelona.png)
 
 ### Players from Brazil
+<details>
+  <summary>Click to expand!</summary>
+  
 ```r
 options(repr.plot.width = 12, repr.plot.height = 8)
 
@@ -200,9 +203,14 @@ Brazil %>%
   theme(axis.text.x = element_text(face="bold",angle = 90, vjust = 0.5, hjust=1))
 
 ```
+</details>
+  
 ![img5](Pic/Brazil.png)
 
 ### Messi Vs Ronaldo (Before the transfer of Messi)
+<details>
+  <summary>Click to expand!</summary>
+  
 ```r
 options(repr.plot.width = 15,repr.plot.height = 8)
 
@@ -214,9 +222,14 @@ ggplot(player,aes(Skill,Exp,fill=Name))+ geom_col(position = "fill")+
   labs(title = "Ronaldo vs Messi")
  
 ```
+</details>
+  
 ![img6](Pic/RonaldoVSMessi.png)
 
-### La liga Native and foreign player 
+### La liga Native and foreign player
+<details>
+  <summary>Click to expand!</summary>
+  
 ```r
 L_NAT <- La_Liga %>% mutate(Nationality=as.character(nationality),
                    Nationality = if_else(nationality %in% "Spain","Native","Foreigner"))
@@ -224,9 +237,14 @@ L_NAT <- La_Liga %>% mutate(Nationality=as.character(nationality),
 ggplot(L_NAT)+geom_bar(aes(x=Nationality,fill= Nationality),show.legend = F)+
   facet_wrap(club_name~.)+labs(title = "La Liga Native and Foreigner player")
 ```
+</details>
+  
 ![img7](Pic/LaLigaNatvsForeign.png)
 
 ### EPL Native and foreign player
+<details>
+  <summary>Click to expand!</summary>
+  
 ```r
 EPL_NAT <- EPL %>% mutate(Nationality=as.character(nationality),
                             Nationality = if_else(nationality %in% "England","Native","Foreigner"))
@@ -234,10 +252,14 @@ EPL_NAT <- EPL %>% mutate(Nationality=as.character(nationality),
 ggplot(EPL_NAT)+geom_bar(aes(x=Nationality,fill= Nationality),show.legend = F)+
   facet_wrap(club_name~.)+labs(title = "EPL Native and Foreigner player")
 ```
-
+</details>
+  
 ![img8](Pic/EPLNatvsForeign.png)
 
 ### Bundesliga Native and foreign player
+<details>
+  <summary>Click to expand!</summary>
+  
 ```r
 Bund_NAT <- Bundesliga %>% mutate(Nationality=as.character(nationality),
                             Nationality = if_else(nationality %in% "Germany","Native","Foreigner"))
@@ -246,9 +268,14 @@ ggplot(Bund_NAT)+geom_bar(aes(x=Nationality,fill= Nationality),show.legend = F)+
   facet_wrap(club_name~.,nrow = 3)+labs(title = "Bundesliga Native and Foreigner player")
 
 ```
+</details>
+  
 ![img9](Pic/BundesLigaNatvsForeign.png)
 
 ### Distribution of players in the whole Fifa data
+<details>
+  <summary>Click to expand!</summary>
+  
 ```r
 options(repr.plot.width = 15,repr.plot.height = 8)
 
@@ -257,9 +284,14 @@ f21 %>% drop_na(player_positionsb)%>%
   ggplot()+geom_bar(aes(x=player_positionsb,fill=player_positionsb),show.legend = F)+
   labs(title = "Player position distribution in the World")
 ```
+</details>
+  
 ![img10](Pic/PosDistWorld.png)
 
 ### Distribution in some top leagues
+<details>
+  <summary>Click to expand!</summary>
+  
 ```r
 options(repr.plot.width = 15,repr.plot.height = 8)
 
@@ -270,54 +302,89 @@ df %>% drop_na(player_positionsb)%>%
   labs(title="League wise Player position distribution")+xlab("Count")+ylab("Positions")
 
 ```
+</details>
+  
 ![img11](Pic/PosDistClub.png)
 
 ### Top 20
 #### Forwards
+<details>
+  <summary>Click to expand!</summary>
+  
 ```r
 subset(fpos,Pos=="Forward") %>% arrange(desc(overall))%>%head(20)%>%
   ggplot(aes(x=overall,y=reorder(short_name,overall)))+geom_col(aes(fill=short_name),show.legend = F)+
   labs(x="Overall",y="Name",title = "Top 20 Forwards in the World")
 ```
+</details>
+  
 ![img12](Pic/Top20Forwards.png)
 #### Wingers
+<details>
+  <summary>Click to expand!</summary>
+  
 ```r
 subset(fpos,Pos=="Winger") %>% arrange(desc(overall))%>%head(20)%>%
   ggplot(aes(x=overall,y=reorder(short_name,overall)))+geom_col(aes(fill=short_name),show.legend = F)+
   labs(x="Overall",y="Name",title = "Top 20 Wingers in the World")
 ```
+</details>
+  
 ![img13](Pic/Top20Winger.png)
 #### Midfielders
+<details>
+  <summary>Click to expand!</summary>
+  
 ```r
 subset(fpos,Pos=="Midfielder") %>% arrange(desc(overall))%>%head(20)%>%
   ggplot(aes(x=overall,y=reorder(short_name,overall)))+geom_col(aes(fill=short_name),show.legend = F)+
   labs(x="Overall",y="Name",title = "Top 20 Midfielders in the World")
 ```
+</details>
+  
 ![img14](Pic/Top20Midfielders.png)
 #### Defenders
+<details>
+  <summary>Click to expand!</summary>
+  
 ```r
 subset(fpos,Pos=="Defender") %>% arrange(desc(overall))%>%head(20)%>%
   ggplot(aes(x=overall,y=reorder(short_name,overall)))+geom_col(aes(fill=short_name),show.legend = F)+
   labs(x="Overall",y="Name",title = "Top 20 Defenders in the World")
 ```
+</details>
+
 ![img15](Pic/Top20Def.png)
 #### Full-Backs
+<details>
+  <summary>Click to expand!</summary>
+  
 ```r
 subset(fpos,Pos=="Full Back") %>% arrange(desc(overall))%>%head(20)%>%
   ggplot(aes(x=overall,y=reorder(short_name,overall)))+geom_col(aes(fill=short_name),show.legend = F)+
   labs(x="Overall",y="Name",title = "Top 20 Full Backs in the World")
 ```
+</details>
+  
 ![img16](Pic/Top20FullBack.png)
 #### Goal Keepers
+<details>
+  <summary>Click to expand!</summary>
+  
 ```r
 subset(fpos,Pos=="Goal Keeper") %>% arrange(desc(overall))%>%head(20)%>%
   ggplot(aes(x=overall,y=reorder(short_name,overall)))+geom_col(aes(fill=short_name),show.legend = F)+
   labs(x="Overall",y="Name",title = "Top 20 Goal Keepers in the World")
 ```
+</details>
+  
 ![img17](Pic/Top20GK.png)
 
 
 ### Most Powerful Clubs
+<details>
+  <summary>Click to expand!</summary>
+  
 ```r
 fpos %>%
   group_by(club_name,Pos) %>%
@@ -332,9 +399,14 @@ fpos %>%
   theme(legend.position = "top",axis.text.y = element_text(face = "bold"),axis.text.x = element_blank())+
   labs(x="",y="",title = "Top 20 powerful clubs with their position class")
 ```
+</details>
+  
 ![img18](Pic/TopPowerClubs.png)
 
 ### Wonder Kids
+<details>
+  <summary>Click to expand!</summary>
+  
 ```r
 fpos %>% filter(age<20, potential>72) %>%
   arrange(-potential) %>%
@@ -348,9 +420,14 @@ fpos %>% filter(age<20, potential>72) %>%
   labs(x="",y="Potential",title = "Age-wise Wonder-Kids",subtitle = "Amongst them some might become star")
 
 ```
+</details>
+  
 ![img19](Pic/WonderKid.png)
 
 ### Most Expensive team possible(Using the given Data)
+<details>
+  <summary>Click to expand!</summary>
+  
 ```r
 d2 <- data.frame(   x=c(0, 0, 16.5, 100, 100,83.5), 
                     xend=c(16.5,16.5, 16.5, 83.5,83.5,83.5),
@@ -377,4 +454,6 @@ p<- ggplot(dfpos)+
   xlab("")+ylab("")
 p
 ```
+</details>
+  
 ![img20](Pic/Team.png)
